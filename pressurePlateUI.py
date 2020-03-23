@@ -6,6 +6,7 @@ from kivy.uix.gridlayout import GridLayout
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.floatlayout import FloatLayout
 from datetime import datetime
+from kivy.uix.textinput import TextInput
 
 
 def RGBConverter(r, g, b):
@@ -80,6 +81,9 @@ class PressurePlate(App):
         self.spiel_beendet_button = Button(on_press=self.plate01spielBeendetAction,
                                            background_normal="img/spielBeendet.png", size_hint_x=None, width=300,
                                            size_hint_y=None, height=300)
+        self.wildcard_text_button = TextInput(text='', width=300, height=300, on_double_tap=self.plate01SaveWildcardText, size_hint=(None, None))
+
+
 
         ## RECHTE SEITE
         self.bemerkt_button_right = Button(on_press=self.plate02BemerktAction, background_normal="img/bemerkt.png",
@@ -112,6 +116,7 @@ class PressurePlate(App):
         self.spiel_beendet_button_right = Button(on_press=self.plate02spielBeendetAction,
                                                  background_normal="img/spielBeendet.png", size_hint_x=None, width=300,
                                                  size_hint_y=None, height=300)
+        self.wildcard_text_button_right = TextInput(text='', width=300, height=300, on_double_tap=self.plate02SaveWildcardText, size_hint=(None, None))
 
         ## LAYOUT : LEFT SIDE
         self.leftRow1 = BoxLayout()
@@ -130,7 +135,7 @@ class PressurePlate(App):
         self.leftRow3.add_widget(self.spiel_nicht_verstanden_button)
 
         self.leftRow4 = BoxLayout()
-        self.leftRow4.add_widget(self.gapFiller)
+        self.leftRow4.add_widget(self.wildcard_text_button)
         self.leftRow4.add_widget(self.spiel_gestartet_button)
         self.leftRow4.add_widget(self.spiel_beendet_button)
 
@@ -157,7 +162,7 @@ class PressurePlate(App):
         self.rightRow3.add_widget(self.spiel_nicht_verstanden_button_right)
 
         self.rightRow4 = BoxLayout()
-        self.rightRow4.add_widget(self.gapFiller_right)
+        self.rightRow4.add_widget(self.wildcard_text_button_right)
         self.rightRow4.add_widget(self.spiel_gestartet_button_right)
         self.rightRow4.add_widget(self.spiel_beendet_button_right)
 
@@ -211,6 +216,10 @@ class PressurePlate(App):
     def plate01spielBeendetAction(self, instance):
         self.saveAction("spiel beendet", "01")
 
+    def plate01SaveWildcardText(self, instance):
+        self.saveAction(self.wildcard_text_button.text, "01")
+        self.wildcard_text_button.text = ""
+
     def plate02BemerktAction(self, instance):
         self.saveAction("bemerkt", "02")
 
@@ -246,6 +255,10 @@ class PressurePlate(App):
 
     def plate02spielBeendetAction(self, instance):
         self.saveAction("spiel beendet", "02")
+
+    def plate02SaveWildcardText(self, instance):
+         self.saveAction(self.wildcard_text_button_right.text, "02")
+         self.wildcard_text_button_right.text = ""
 
     def saveAction(self, actionname, whichPlate):
         dateTimeObj = datetime.now()
