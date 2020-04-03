@@ -4,3 +4,6 @@ An iterative prototype in the context of my master thesis "Exploration von inter
 For the user tests, this python UI got created to easily protocol the user interaction with the prototypes.
 
 The code for the plates (using ESP8266's) can be found [here](https://github.com/binarykittenDE/pressure_plates).
+
+# Thesis
+The thesis examines the use of unobtrusive, interactive interfaces in a semi-public meetup situation. The situation "person does not integrate" was selected on the basis of a room situation analysis. Based on this analysis, different prototypes will be iteratively tested in a real meetup situation.
